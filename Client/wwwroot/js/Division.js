@@ -31,25 +31,21 @@
                         </button>
                         <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="deleteModal" onclick="deleteDivision('${data.id}')">
                          Delete
-                        </button>
-                           
-                        `
+                        </button> `
                 }
             },
         ],
         dom: 'Bfrtip',
-        buttons: ['colvis', 'copy', 'excel', 'pdf', 'print']
+        buttons: [
+            'colvis',
+            'excel',
+            'print'
+        ]
     });
-    for (var i = 1; i < 7; i++) {
-        $.ajax({
-            url: 'https://localhost:7181/api/Divisons/' + i,
-            dataType: 'json',
-            success: function (json) {
-                table.rows.add(json.results).draw();
-            }
-        });
-    }
+
 });
+
+
 
 
 
@@ -61,39 +57,39 @@ function createDivision() {
     data = {
         "id": id,
         "name": name
-        
+
     };
     console.log(data);
-
-    $.ajax({
-        type: "POST",
-        url: `https://localhost:7181/api/Divisons/`,
-        data: JSON.stringify(data),
-        dataType: 'json',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (data) {
-            Swal.fire({
-                title: 'Do you want to save the changes?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Saved!', '', 'success')
-                } else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'yes, save',
+        denyButtonText: `Don't save`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: `https://localhost:7181/api/Divisons/`,
+                data: JSON.stringify(data),
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                success: function () {
+                    Swal.fire('Saved!', '', 'success').then(function () {
+                        location.reload();
+                    })
+                },
+                error: function (xhr, ajaxOption, theownError) {
+                    Swal.fire('error delete');
                 }
             });
-            
         }
     });
 }
 
- 
+
 function detailsDivision(id) {
     $.ajax({
         url: `https://localhost:7181/api/Divisons/${id}`,
@@ -112,7 +108,7 @@ function detailsDivision(id) {
 }
 
 function editDivision(id) {
-        $.ajax({
+    $.ajax({
         type: "GET",
         url: `https://localhost:7181/api/Divisons/${id}`
     }).done((res) => {
@@ -129,42 +125,110 @@ function saveEdit() {
     let data;
     let id = parseInt($('#divisionId').val());
     let name = $('#divisionName').val()
-   
+
 
     data = {
         "id": id,
         "name": name,
-        
-    }
 
-    $.ajax({
-        url: 'https://localhost:7181/api/Divisons/',
-        type: 'PUT',
-        data: JSON.stringify(data),
-        dataType: 'json',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (data) {
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            );
-            location.reload();
+    }
+    Swal.fire({
+        title: 'Do you want to delete this?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'yes, delete',
+        denyButtonText: `Don't delete`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'https://localhost:7181/api/Divisons/',
+                type: 'PUT',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                success: function () {
+                    Swal.fire('Saved!', '', 'success').then(function () {
+                        location.reload();
+                    })
+                },
+                error: function (xhr, ajaxOption, theownError) {
+                    Swal.fire('error delete');
+                }
+            });
         }
     });
 }
+
+
+
+
+
 function deleteDivision(id) {
-    $.ajax({
-        url: `https://localhost:7181/api/Divisons/${id}`,
-        method: 'DELETE',
-        dataType: 'json',
-
-        success: function (message) {
-            alert("Delete Data Successfull" + message);
-            location.reload();
-
+    Swal.fire({
+        title: 'Do you want to delete this?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'yes, delete',
+        denyButtonText: `Don't delete`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `https://localhost:7181/api/Divisons/${id}`,
+                method: 'DELETE',
+                dataType: 'json',
+                success: function () {
+                    Swal.fire('Saved!', '', 'success').then(function () {
+                        location.reload();
+                    })
+                },
+                error: function (xhr, ajaxOption, theownError) {
+                    Swal.fire('error delete');
+                }
+            });
         }
-    })
+    });
 }
+
+//function createDivision() {
+//    let data;
+//    let id = 0;
+//    let name = $('#divisionName').val();
+
+//    data = {
+//        "id": id,
+//        "name": name
+
+//    };
+//    console.log(data);
+
+//    $.ajax({
+//        type: "POST",
+//        url: `https://localhost:7181/api/Divisons/`,
+//        data: JSON.stringify(data),
+//        dataType: 'json',
+//        headers: {
+//            'Content-Type': 'application/json'
+//        },
+//        success: function (data) {
+//            alert('Load was performed.');
+//            location.reload();
+//        }
+//        }
+//    });
+//}
+
+//function deleteDivision(id) {
+//    $.ajax({
+//        url: `https://localhost:7181/api/Divisons/${id}`,
+//        method: 'DELETE',
+//        dataType: 'json',
+
+//        success: function (message) {
+//            alert("Delete Data Successfull" + message);
+//            location.reload();
+
+//        }
+//    })
+//}
