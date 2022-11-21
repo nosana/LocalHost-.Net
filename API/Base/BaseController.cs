@@ -58,7 +58,7 @@ namespace API.Base
          
         }
 
-        [HttpGet("GetID")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             try
@@ -97,7 +97,7 @@ namespace API.Base
            
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try

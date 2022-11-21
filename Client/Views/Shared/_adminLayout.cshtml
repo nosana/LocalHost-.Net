@@ -4,6 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
     <link rel="apple-touch-icon" sizes="76x76" href="~/lib/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="~/lib/assets/img/favicon.png">
     <title>
@@ -21,6 +26,7 @@
     <link href="~/lib/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="~/lib/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -40,7 +46,7 @@
                     <a class="nav-link active" asp-area="" asp-controller="Division" asp-action="Index">
                         
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                            <i class="ni ni-circle-08 text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Division</span>
                     </a>
@@ -49,25 +55,14 @@
                     <a class="nav-link active" asp-area="" asp-controller="Department" asp-action="Index">
                         
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                            <i class="ni ni-circle-08 text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Department</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="sidenav-footer mx-3 ">
-            <div class="card card-plain shadow-none" id="sidenavCard">
-                <img class="w-50 mx-auto" src="../assets/img/illustrations/icon-documentation.svg" alt="sidebar_illustration">
-                <div class="card-body text-center p-3 w-100 pt-0">
-                    <div class="docs-info">
-                        <h6 class="mb-0">Need help?</h6>
-                        <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-                    </div>
-                </div>
-            </div>
-     
-        </div>
+       
     </aside>
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->
@@ -127,10 +122,14 @@
     <script src="~/lib/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="~/lib/assets/js/plugins/chartjs.min.js"></script>
 
+   
+    
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/lib/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    
+    
 </body>
 
 </html>
